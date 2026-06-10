@@ -6,8 +6,9 @@ import ffmpegPath from "ffmpeg-static";
 
 const run = promisify(execFile);
 const ROOT = path.resolve(import.meta.dirname, "..");
+const VID_DIR = path.join(ROOT, "assets", "videos");
 
-const entries = await readdir(ROOT, { withFileTypes: true });
+const entries = await readdir(VID_DIR, { withFileTypes: true });
 const videos = entries
   .filter((e) => e.isFile() && path.extname(e.name).toLowerCase() === ".mp4")
   .map((e) => e.name);
@@ -16,8 +17,8 @@ let totalBefore = 0;
 let totalAfter = 0;
 
 for (const name of videos) {
-  const src = path.join(ROOT, name);
-  const tmp = path.join(ROOT, name.replace(/\.mp4$/i, ".opt.mp4"));
+  const src = path.join(VID_DIR, name);
+  const tmp = path.join(VID_DIR, name.replace(/\.mp4$/i, ".opt.mp4"));
   const before = (await stat(src)).size;
 
   await run(ffmpegPath, [

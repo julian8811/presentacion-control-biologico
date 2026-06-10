@@ -6,11 +6,12 @@ const html = await readFile(path.join(ROOT, "index.html"), "utf8");
 
 const refs = new Set();
 const patterns = [
-  /data-src="(\.\/[^"]+)"/g,
-  /data-vsrc="(\.\/[^"]+)"/g,
-  /data-bg="(\.\/[^"]+)"/g,
-  /url\('(\.\/[^']+\.(?:webp|png|jpe?g))'\)/g,
-  /\bimg:\s*'(\.\/[^']+)'/g,
+  /data-src="([^"]+\.webp)"/g,
+  /data-vsrc="([^"]+\.mp4)"/g,
+  /data-bg="([^"]+\.webp)"/g,
+  /url\('([^']+\.webp)'\)/g,
+  /\bimg:\s*'([^']+\.webp)'/g,
+  /openImageModal\('([^']+\.webp)'/g,
 ];
 for (const re of patterns) {
   let m;

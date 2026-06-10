@@ -3,13 +3,14 @@ import { readdir, readFile, writeFile, stat } from "node:fs/promises";
 import path from "node:path";
 
 const ROOT = path.resolve(import.meta.dirname, "..");
+const IMG_DIR = path.join(ROOT, "assets", "images");
 const HTML = path.join(ROOT, "index.html");
 const MAX_DIM = 1600;
 const QUALITY = 80;
 
 const exts = new Set([".jpeg", ".jpg", ".png"]);
 
-const entries = await readdir(ROOT, { withFileTypes: true });
+const entries = await readdir(IMG_DIR, { withFileTypes: true }).catch(() => []);
 const images = entries
   .filter((e) => e.isFile() && exts.has(path.extname(e.name).toLowerCase()))
   .map((e) => e.name);
@@ -20,9 +21,9 @@ let totalAfter = 0;
 const renamed = [];
 
 for (const name of images) {
-  const src = path.join(ROOT, name);
+  const src = path.join(IMG_DIR, name);
   const webpName = name.replace(/\.(jpeg|jpg|png)$/i, ".webp");
-  const dest = path.join(ROOT, webpName);
+  const dest = path.join(IMG_DIR, webpName);
 
   const before = (await stat(src)).size;
   await sharp(src)
@@ -35,8 +36,10 @@ for (const name of images) {
   totalBefore += before;
   totalAfter += after;
 
-  if (html.includes(name)) {
-    html = html.split(name).join(webpName);
+  const refFrom = `assets/images/${name}`;
+  const refTo = `assets/images/${webpName}`;
+  if (html.includes(refFrom)) {
+    html = html.split(refFrom).join(refTo);
     renamed.push(name);
   }
   console.log(
