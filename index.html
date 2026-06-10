@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>Control Biológico, Agricultura Sostenible</title>
 <style>
 /* ===== CSS Custom Properties ===== */
@@ -1384,52 +1384,296 @@ tbody tr:hover { background: rgba(27, 67, 50,0.06); }
   border-bottom: 1px solid var(--outline-variant);
 }
 
+/* ===== Layout utilities (responsive) ===== */
+.layout-timeline {
+  display: grid;
+  grid-template-columns: minmax(0, 35%) minmax(0, 1fr);
+  gap: 30px;
+  align-items: stretch;
+}
+.layout-quad {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 20px;
+}
+.layout-media-text {
+  display: grid;
+  grid-template-columns: minmax(0, 280px) minmax(0, 1fr);
+  gap: 20px;
+  align-items: start;
+}
+.layout-media-text-wide {
+  display: grid;
+  grid-template-columns: minmax(0, 350px) minmax(0, 1fr);
+  gap: 30px;
+  align-items: stretch;
+}
+.layout-duo {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 20px;
+}
+.layout-duo-lg {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 24px;
+  align-items: stretch;
+}
+.layout-duo-sm {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 15px;
+}
+.layout-trio {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 20px;
+}
+.layout-trio-sm {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+}
+.layout-ref-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 12px;
+  align-items: start;
+}
+.layout-panel {
+  background: white;
+  padding: 20px;
+  border-radius: 16px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+}
+.card-row {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+.media-tall { height: 220px; }
+.media-mid { height: 150px; }
+.media-hero { height: 260px; }
+.media-sm { height: 140px; }
+.media-sm img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.media-tall video,
+.media-mid video,
+.media-hero video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.layout-media-text > img,
+.layout-media-text-wide > video {
+  width: 100%;
+  height: 220px;
+  object-fit: cover;
+  border-radius: 12px;
+}
+
 /* ===== Responsive ===== */
 @media (max-width: 1024px) {
-  :root { --slide-padding: 50px 30px; }
+  :root { --slide-padding: 48px 24px 80px; }
   .grid-3 { grid-template-columns: repeat(2, 1fr); }
   .institution-list { grid-template-columns: 1fr; }
   .ref-list { columns: 1; }
   .grid-2 { grid-template-columns: 1fr; }
+  .layout-timeline { grid-template-columns: 38% 1fr; gap: 20px; }
+  .layout-media-text { grid-template-columns: 220px 1fr; }
+  .layout-media-text-wide { grid-template-columns: 280px 1fr; }
 }
 
 @media (max-width: 768px) {
-  :root { --slide-padding: 50px 20px; }
-  .grid-3 { grid-template-columns: 1fr; }
-  .grid-2 { grid-template-columns: 1fr; }
-  .grid-5 { grid-template-columns: repeat(2, 1fr); }
+  html { font-size: 16px; }
+
+  :root {
+    --slide-padding: calc(52px + env(safe-area-inset-top, 0px)) 16px calc(84px + env(safe-area-inset-bottom, 0px));
+    --gutter: 12px;
+  }
+
+  .slide {
+    justify-content: flex-start;
+    align-items: stretch;
+    padding: calc(52px + env(safe-area-inset-top, 0px)) 16px calc(84px + env(safe-area-inset-bottom, 0px));
+  }
+
+  h1 { font-size: 1.75rem; }
+  h2 { font-size: 1.35rem; margin-bottom: 0.75rem; }
+  h3 { font-size: 1.1rem; }
+  h4 { font-size: 1rem; }
+  p, .subtitle { font-size: 0.95rem; }
+
+  .slide-content { max-width: 100%; }
+  .slide-number {
+    bottom: calc(72px + env(safe-area-inset-bottom, 0px));
+    right: 12px;
+    font-size: 0.7rem;
+  }
+
+  .grid-3,
+  .grid-2,
+  .grid-5,
+  .layout-timeline,
+  .layout-quad,
+  .layout-media-text,
+  .layout-media-text-wide,
+  .layout-duo,
+  .layout-duo-lg,
+  .layout-duo-sm,
+  .layout-trio,
+  .layout-trio-sm,
+  .layout-ref-grid {
+    grid-template-columns: 1fr !important;
+    gap: 14px;
+  }
+
+  .layout-trio > [style*="grid-column: span 2"],
+  .layout-duo > [style*="grid-column: span 2"] {
+    grid-column: span 1 !important;
+  }
+
+  .layout-media-text > img,
+  .layout-media-text-wide > video {
+    height: 160px;
+  }
+
+  .layout-panel { padding: 14px; }
+
   .comparison-card { grid-template-columns: 1fr; }
   .comparison-col.bio { border-right: none; border-bottom: 1px solid var(--border); }
 
-  .nav-bar { padding: 8px 12px; gap: 8px; }
-  .nav-btn { padding: 8px 12px; font-size: 0.8rem; }
-  .nav-btn span { display: none; }
-  .progress-container { max-width: 200px; }
+  .diagram-flow-h {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 8px;
+  }
+  .diagram-flow-h .node { min-width: 0; width: 100%; }
+  .diagram-flow-h .arrow {
+    transform: rotate(90deg);
+    padding: 2px 0;
+    align-self: center;
+  }
 
-  .sidebar { width: 260px; }
+  .card-row {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .card-row img {
+    width: 100% !important;
+    height: 140px !important;
+    max-width: none;
+  }
+
+  .media-tall { height: 180px; }
+  .media-mid { height: 130px; }
+  .media-hero { height: 200px; }
+  .media-sm { height: 120px; }
+
+  #tl-img { height: 180px !important; }
+
+  .crop-cards { grid-template-columns: 1fr !important; }
+
+  .tabs-header {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    flex-wrap: nowrap;
+    scrollbar-width: none;
+    margin-bottom: 14px;
+  }
+  .tabs-header::-webkit-scrollbar { display: none; }
+  .tab-btn {
+    flex-shrink: 0;
+    padding: 8px 12px;
+    font-size: 0.78rem;
+  }
+
+  #filterBar,
+  .filter-bar {
+    flex-wrap: wrap !important;
+    justify-content: center !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    border-radius: 16px !important;
+    padding: 6px !important;
+    gap: 6px !important;
+  }
+  .filter-btn {
+    font-size: 0.72rem !important;
+    padding: 6px 12px !important;
+  }
+
+  .nav-bar {
+    padding: 8px 12px calc(8px + env(safe-area-inset-bottom, 0px));
+    gap: 8px;
+  }
+  .nav-btn { padding: 8px 12px !important; font-size: 0.8rem; }
+  .nav-btn span { display: none; }
+  .progress-container { max-width: none; flex: 1; min-width: 0; }
+
+  .sidebar { width: min(100%, 300px); }
+  .sidebar-toggle { top: calc(12px + env(safe-area-inset-top, 0px)); left: 12px; }
+
+  #slide-1 .btn-start {
+    width: 100%;
+    max-width: 320px;
+    justify-content: center;
+  }
 
   table { font-size: 0.78rem; }
   thead th, tbody td { padding: 8px 10px; }
 
   .flow-diagram { flex-direction: column; }
   .flow-arrow { transform: rotate(90deg); padding: 4px 0; }
+
+  .back-to-top {
+    bottom: calc(88px + env(safe-area-inset-bottom, 0px));
+    right: 12px;
+  }
 }
 
 @media (max-width: 480px) {
-  :root { --slide-padding: 50px 14px; }
-  h2 { font-size: 1.3rem; }
-  .grid-5 { grid-template-columns: 1fr 1fr; gap: 10px; }
+  html { font-size: 15px; }
 
-  .nav-btn { min-height: 44px; padding: 6px 10px; }
+  :root {
+    --slide-padding: calc(48px + env(safe-area-inset-top, 0px)) 12px calc(80px + env(safe-area-inset-bottom, 0px));
+  }
+
+  .slide {
+    padding: calc(48px + env(safe-area-inset-top, 0px)) 12px calc(80px + env(safe-area-inset-bottom, 0px));
+  }
+
+  h1 { font-size: 1.55rem; }
+  h2 { font-size: 1.2rem; }
+
+  .grid-5 { grid-template-columns: 1fr; gap: 10px; }
+
+  .nav-btn { min-height: 44px; padding: 6px 10px !important; }
   .nav-btn svg { width: 20px; height: 20px; }
   .progress-text { min-width: 34px; font-size: 0.75rem; }
   .sidebar { width: 100%; }
 
   .milestone__title { font-size: 0.85rem; }
-  .tab-btn { padding: 8px 12px; font-size: 0.8rem; }
+  .tab-btn { padding: 8px 10px; font-size: 0.74rem; }
   .quiz-option { font-size: 0.82rem; padding: 10px 12px; }
   .institution-list { grid-template-columns: 1fr; }
   .ref-list li { font-size: 0.7rem; }
+
+  .layout-panel { padding: 12px; }
+  .media-tall { height: 160px; }
+  .media-hero { height: 170px; }
+}
+
+@media (hover: none) {
+  .card:hover,
+  .diagram-flow-h .node:hover,
+  .nav-btn:hover:not(:disabled) {
+    transform: none;
+    box-shadow: inherit;
+  }
 }
 
 /* ===== NEW ANIMATIONS ===== */
@@ -2573,7 +2817,7 @@ p {
           </ul>
         </div>
       </div>
-      <div class="card" style="margin-top: 15px; padding: 16px; border-left: 4px solid var(--tertiary); display: flex; align-items: center; gap: 16px;">
+      <div class="card card-row" style="margin-top: 15px; padding: 16px; border-left: 4px solid var(--tertiary);">
         <img class="lazy-media" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" data-src="assets/images/dato curioso.webp" alt="Dato Curioso" style="width: 120px; height: 120px; object-fit: cover; border-radius: 8px; flex-shrink: 0; cursor: pointer; transition: transform 0.3s;" onclick="openImageModal(this.src)" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
         <p style="margin: 0; font-size: 0.95rem; line-height: 1.5;">
           <strong>Dato clave:</strong> Con los insecticidas, las plagas pueden volverse resistentes y exigir productos cada vez más fuertes. En el control biológico, depredadores y parasitoides también se adaptan, lo que dificulta que la plaga escape del equilibrio natural.
@@ -2630,7 +2874,7 @@ p {
       <h2>Historia del control biológico</h2>
       <p style="font-size:0.85rem; margin-bottom: 20px;">Desde la antigua China hasta la era de la inteligencia artificial. <strong>Haz clic en cada hito</strong> para conocerlo.</p>
       
-      <div style="display: grid; grid-template-columns: 35% 65%; gap: 30px; align-items: stretch; background: white; padding: 20px; border-radius: 16px; box-shadow: 0 10px 30px rgba(0,0,0,0.05); flex-grow: 1;">
+      <div class="layout-timeline layout-panel" style="flex-grow: 1;">
         
         <!-- Lista compacta de años -->
         <div class="timeline-list" style="position: relative; border-left: 3px solid var(--primary-light); padding-left: 20px; display: flex; flex-direction: column; gap: 6px; justify-content: center;">
@@ -2689,11 +2933,11 @@ p {
       <h2>Fundamentos ecológicos</h2>
       <p style="text-align:center;font-size:0.85rem;color:var(--text-light); margin-bottom: 20px;">Principios ecológicos que regulan las interacciones en los agroecosistemas</p>
       
-      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; flex-grow: 1;">
+      <div class="layout-quad" style="flex-grow: 1;">
         
         <!-- Depredador-presa -->
         <div class="card entrance-left" style="padding: 0; overflow: hidden; display: flex; flex-direction: column; box-shadow: 0 4px 15px rgba(0,0,0,0.05);">
-          <div style="height: 140px; overflow: hidden; position: relative;">
+          <div class="media-sm" style="overflow: hidden; position: relative;">
             <img class="lazy-media" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" data-src="assets/images/depredador presa.webp" style="width: 100%; height: 100%; object-fit: cover; cursor: zoom-in; transition: transform 0.3s;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'" onclick="openImageModal(this.src)">
           </div>
           <div style="padding: 15px; background: white; flex-grow: 1;">
@@ -2704,7 +2948,7 @@ p {
 
         <!-- Parasitoide-hospedero -->
         <div class="card entrance-right" style="padding: 0; overflow: hidden; display: flex; flex-direction: column; box-shadow: 0 4px 15px rgba(0,0,0,0.05);">
-          <div style="height: 140px; overflow: hidden; position: relative;">
+          <div class="media-sm" style="overflow: hidden; position: relative;">
             <img class="lazy-media" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" data-src="assets/images/parasitoide hospedero.webp" style="width: 100%; height: 100%; object-fit: cover; cursor: zoom-in; transition: transform 0.3s;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'" onclick="openImageModal(this.src)">
           </div>
           <div style="padding: 15px; background: white; flex-grow: 1;">
@@ -2715,7 +2959,7 @@ p {
 
         <!-- Regulación denso-dependiente -->
         <div class="card entrance-left" style="padding: 0; overflow: hidden; display: flex; flex-direction: column; box-shadow: 0 4px 15px rgba(0,0,0,0.05);">
-          <div style="height: 140px; overflow: hidden; position: relative;">
+          <div class="media-sm" style="overflow: hidden; position: relative;">
             <img class="lazy-media" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" data-src="assets/images/regulacion denso dependiente.webp" style="width: 100%; height: 100%; object-fit: cover; cursor: zoom-in; transition: transform 0.3s;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'" onclick="openImageModal(this.src)">
           </div>
           <div style="padding: 15px; background: white; flex-grow: 1;">
@@ -2726,7 +2970,7 @@ p {
 
         <!-- Capacidad de carga y Redes tróficas -->
         <div class="card entrance-right" style="padding: 0; overflow: hidden; display: flex; flex-direction: column; box-shadow: 0 4px 15px rgba(0,0,0,0.05);">
-          <div style="height: 140px; overflow: hidden; position: relative;">
+          <div class="media-sm" style="overflow: hidden; position: relative;">
             <img class="lazy-media" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" data-src="assets/images/capacidad de carga y redes troficas.webp" style="width: 100%; height: 100%; object-fit: cover; cursor: zoom-in; transition: transform 0.3s;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'" onclick="openImageModal(this.src)">
           </div>
           <div style="padding: 15px; background: white; flex-grow: 1;">
@@ -2752,7 +2996,7 @@ p {
       </div>
 
       <div class="tab-panel active" id="tab-clasico">
-        <div style="display: grid; grid-template-columns: 280px 1fr; gap: 20px; align-items: start;">
+        <div class="layout-media-text">
           <img class="lazy-media" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" data-src="assets/images/clasico.webp" style="width: 100%; height: 220px; object-fit: cover; border-radius: 12px; box-shadow: 0 5px 15px rgba(0,0,0,0.08); cursor: zoom-in;" onclick="openImageModal(this.src)">
           <div>
             <p style="font-size:0.85rem; margin-top: 0; margin-bottom: 15px;"><strong>Importación deliberada y establecimiento permanente</strong> de enemigos naturales exóticos donde una plaga, generalmente también exótica, se ha establecido sin sus reguladores naturales.</p>
@@ -2770,11 +3014,11 @@ p {
       </div>
 
       <div class="tab-panel" id="tab-aumentativo">
-        <div style="display: grid; grid-template-columns: 280px 1fr; gap: 20px; align-items: start;">
+        <div class="layout-media-text">
           <img class="lazy-media" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" data-src="assets/images/aumentativo.webp" style="width: 100%; height: 220px; object-fit: cover; border-radius: 12px; box-shadow: 0 5px 15px rgba(0,0,0,0.08); cursor: zoom-in;" onclick="openImageModal(this.src)">
           <div>
             <p style="font-size:0.85rem; margin-top: 0; margin-bottom: 15px;"><strong>Liberación periódica</strong> de enemigos naturales criados en biofábricas, para incrementar temporalmente sus poblaciones en el campo. Se divide en dos modalidades principales:</p>
-            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
+            <div class="layout-duo-sm">
               <div style="background: rgba(0,0,0,0.02); padding: 12px; border-radius: 8px;">
                 <h4 style="margin-top:0; color:var(--primary); font-size: 0.9rem;"> Liberación Inoculativa</h4>
                 <p style="font-size:0.8rem; margin-bottom:0;">Liberar pocas cantidades para que se reproduzcan y controlen a mediano plazo. Ejemplo: <em>Encarsia formosa</em> en invernaderos.</p>
@@ -2789,7 +3033,7 @@ p {
       </div>
 
       <div class="tab-panel" id="tab-conservacion">
-        <div style="display: grid; grid-template-columns: 280px 1fr; gap: 20px; align-items: start;">
+        <div class="layout-media-text">
           <img class="lazy-media" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" data-src="assets/images/Conservación.webp" style="width: 100%; height: 220px; object-fit: cover; border-radius: 12px; box-shadow: 0 5px 15px rgba(0,0,0,0.08); cursor: zoom-in;" onclick="openImageModal(this.src)">
           <div>
             <p style="font-size:0.85rem; margin-top: 0; margin-bottom: 15px;"><strong>Modificar las prácticas agrícolas y el entorno</strong> para favorecer la supervivencia y actividad de los enemigos naturales que ya existen en la región. Es la estrategia más accesible y sostenible.</p>
@@ -2814,10 +3058,10 @@ p {
     <div class="slide-content">
       <h2>Nuestros aliados: organismos benéficos</h2>
       <p class="subtitle" style="font-size: 1rem; margin-bottom: 20px;">Conoce a los depredadores y los parasitoides.</p>
-      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 24px; align-items: stretch; margin-top: 20px;">
+      <div class="layout-duo-lg" style="margin-top: 20px;">
         
         <div class="card entrance-left" style="padding: 0; overflow: hidden; border-radius: 16px; box-shadow: 0 10px 30px rgba(0,0,0,0.08); display: flex; flex-direction: column;">
-          <div style="position: relative; width: 100%; height: 220px; overflow: hidden; background: #000;">
+          <div class="media-tall" style="position: relative; width: 100%; overflow: hidden; background: #000;">
             <video data-vsrc="assets/videos/mariquitas.mp4" loop muted playsinline preload="none" style="width: 100%; height: 100%; object-fit: cover; opacity: 0.9; cursor: zoom-in;" onclick="openImageModal(this.currentSrc, true)"></video>
             <div style="position: absolute; bottom: 0; left: 0; right: 0; height: 30px; background: linear-gradient(to top, rgba(0,0,0,0.5), transparent); pointer-events: none;"></div>
           </div>
@@ -2830,7 +3074,7 @@ p {
         </div>
 
         <div class="card entrance-right" style="padding: 0; overflow: hidden; border-radius: 16px; box-shadow: 0 10px 30px rgba(0,0,0,0.08); display: flex; flex-direction: column;">
-          <div style="position: relative; width: 100%; height: 220px; overflow: hidden; background: #000;">
+          <div class="media-tall" style="position: relative; width: 100%; overflow: hidden; background: #000;">
             <video data-vsrc="assets/videos/avispa.mp4" loop muted playsinline preload="none" style="width: 100%; height: 100%; object-fit: cover; opacity: 0.9; cursor: zoom-in;" onclick="openImageModal(this.currentSrc, true)"></video>
             <div style="position: absolute; bottom: 0; left: 0; right: 0; height: 30px; background: linear-gradient(to top, rgba(0,0,0,0.5), transparent); pointer-events: none;"></div>
           </div>
@@ -2855,7 +3099,7 @@ p {
       <div class="grid-3" style="gap: 20px;">
         
         <div class="card mech-card entrance-left" style="border-top:3px solid var(--green); padding: 0; overflow: hidden; display: flex; flex-direction: column; box-shadow: 0 8px 20px rgba(0,0,0,0.06);">
-          <div style="position: relative; width: 100%; height: 150px; background: #000;">
+          <div class="media-mid" style="position: relative; width: 100%; background: #000;">
             <video data-vsrc="assets/videos/Depredación directa.mp4" loop muted playsinline preload="none" style="width: 100%; height: 100%; object-fit: cover; opacity: 0.95; cursor: zoom-in;" onclick="openImageModal(this.currentSrc, true)"></video>
             <div style="position: absolute; bottom: 0; left: 0; right: 0; height: 30px; background: linear-gradient(to top, rgba(0,0,0,0.6), transparent); pointer-events: none;"></div>
           </div>
@@ -2866,7 +3110,7 @@ p {
         </div>
 
         <div class="card mech-card entrance-up" style="border-top:3px solid var(--brown); padding: 0; overflow: hidden; display: flex; flex-direction: column; box-shadow: 0 8px 20px rgba(0,0,0,0.06);">
-          <div style="position: relative; width: 100%; height: 150px; background: #000;">
+          <div class="media-mid" style="position: relative; width: 100%; background: #000;">
             <video data-vsrc="assets/videos/Parasitismo.mp4" loop muted playsinline preload="none" style="width: 100%; height: 100%; object-fit: cover; opacity: 0.95; cursor: zoom-in;" onclick="openImageModal(this.currentSrc, true)"></video>
             <div style="position: absolute; bottom: 0; left: 0; right: 0; height: 30px; background: linear-gradient(to top, rgba(0,0,0,0.6), transparent); pointer-events: none;"></div>
           </div>
@@ -2877,7 +3121,7 @@ p {
         </div>
 
         <div class="card mech-card entrance-right" style="border-top:3px solid var(--green-dark); padding: 0; overflow: hidden; display: flex; flex-direction: column; box-shadow: 0 8px 20px rgba(0,0,0,0.06);">
-          <div style="position: relative; width: 100%; height: 150px; background: #000;">
+          <div class="media-mid" style="position: relative; width: 100%; background: #000;">
             <video data-vsrc="assets/videos/Infección.mp4" loop muted playsinline preload="none" style="width: 100%; height: 100%; object-fit: cover; opacity: 0.95; cursor: zoom-in;" onclick="openImageModal(this.currentSrc, true)"></video>
             <div style="position: absolute; bottom: 0; left: 0; right: 0; height: 30px; background: linear-gradient(to top, rgba(0,0,0,0.6), transparent); pointer-events: none;"></div>
           </div>
@@ -2888,7 +3132,7 @@ p {
         </div>
 
         <div class="card mech-card entrance-left" style="border-top:3px solid #e67e22; padding: 0; overflow: hidden; display: flex; flex-direction: column; box-shadow: 0 8px 20px rgba(0,0,0,0.06);">
-          <div style="position: relative; width: 100%; height: 150px; background: #000;">
+          <div class="media-mid" style="position: relative; width: 100%; background: #000;">
             <video data-vsrc="assets/videos/Toxinas.mp4" loop muted playsinline preload="none" style="width: 100%; height: 100%; object-fit: cover; opacity: 0.95; cursor: zoom-in;" onclick="openImageModal(this.currentSrc, true)"></video>
             <div style="position: absolute; bottom: 0; left: 0; right: 0; height: 30px; background: linear-gradient(to top, rgba(0,0,0,0.6), transparent); pointer-events: none;"></div>
           </div>
@@ -2899,7 +3143,7 @@ p {
         </div>
 
         <div class="card mech-card entrance-scale" style="border-top:3px solid var(--yellow); padding: 0; overflow: hidden; display: flex; flex-direction: column; box-shadow: 0 8px 20px rgba(0,0,0,0.06);">
-          <div style="position: relative; width: 100%; height: 150px; background: #000;">
+          <div class="media-mid" style="position: relative; width: 100%; background: #000;">
             <video data-vsrc="assets/videos/trichoderma.mp4" loop muted playsinline preload="none" style="width: 100%; height: 100%; object-fit: cover; opacity: 0.95; cursor: zoom-in;" onclick="openImageModal(this.currentSrc, true)"></video>
             <div style="position: absolute; bottom: 0; left: 0; right: 0; height: 30px; background: linear-gradient(to top, rgba(0,0,0,0.6), transparent); pointer-events: none;"></div>
           </div>
@@ -2910,7 +3154,7 @@ p {
         </div>
 
         <div class="card mech-card entrance-right" style="border-top:3px solid #9b59b6; padding: 0; overflow: hidden; display: flex; flex-direction: column; box-shadow: 0 8px 20px rgba(0,0,0,0.06);">
-          <div style="position: relative; width: 100%; height: 150px; background: #000;">
+          <div class="media-mid" style="position: relative; width: 100%; background: #000;">
             <video data-vsrc="assets/videos/reducción de fecundidad.mp4" loop muted playsinline preload="none" style="width: 100%; height: 100%; object-fit: cover; opacity: 0.95; cursor: zoom-in;" onclick="openImageModal(this.currentSrc, true)"></video>
             <div style="position: absolute; bottom: 0; left: 0; right: 0; height: 30px; background: linear-gradient(to top, rgba(0,0,0,0.6), transparent); pointer-events: none;"></div>
           </div>
@@ -2929,8 +3173,8 @@ p {
   <section class="slide" data-slide="10">
     <div class="slide-content">
       <h2>Hongos entomopatógenos: defensa microscópica</h2>
-      <div style="display: grid; grid-template-columns: 350px 1fr; gap: 30px; align-items: stretch; margin-top: 20px;">
-        <div style="position: relative; width: 100%; height: 260px; overflow: hidden; border-radius: 16px; box-shadow: 0 10px 30px rgba(0,0,0,0.15); background: #000; align-self: center;">
+      <div class="layout-media-text-wide" style="margin-top: 20px;">
+        <div class="media-hero" style="position: relative; width: 100%; overflow: hidden; border-radius: 16px; box-shadow: 0 10px 30px rgba(0,0,0,0.15); background: #000; align-self: center;">
           <video data-vsrc="assets/videos/hongos entomopatogenos.mp4" loop muted playsinline preload="none" style="width: 100%; height: 100%; object-fit: cover; opacity: 0.95; cursor: zoom-in;" onclick="openImageModal(this.currentSrc, true)"></video>
           <div style="position: absolute; bottom: 0; left: 0; right: 0; height: 40px; background: linear-gradient(to top, rgba(0,0,0,0.6), transparent); pointer-events: none;"></div>
         </div>
@@ -2965,7 +3209,7 @@ p {
         <button class="filter-btn" data-filter="bacteria" onclick="filterCrops('bacteria')" style="border-radius: 40px; padding: 6px 16px; font-weight: 600; transition: all 0.3s ease; border: none; cursor: pointer; font-size: 0.85rem;"> Bacteria</button>
       </div>
 
-      <div class="crop-cards" id="cropCards" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); gap: 15px;">
+      <div class="crop-cards layout-ref-grid" id="cropCards">
         
         <div class="crop-card border-parasitoide" data-type="parasitoide" style="background: white; border-radius: 12px; padding: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); border-left: 5px solid var(--brown); display: flex; flex-direction: column; gap: 6px; transition: transform 0.3s, box-shadow 0.3s;">
           <img class="lazy-media" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" data-src="assets/images/Hortalizas.webp" alt="Hortalizas" style="width: 100%; height: 90px; object-fit: cover; border-radius: 8px; cursor: pointer; transition: transform 0.2s;" onclick="openImageModal(this.src, false)" onmouseover="this.style.transform='scale(1.02)'" onmouseout="this.style.transform='scale(1)'">
@@ -3039,7 +3283,7 @@ p {
       <h2 style="margin-bottom: 5px;">Manejo integrado de plagas (MIP): el plan de defensa integral</h2>
       <p style="text-align:center;font-size:0.9rem;color:var(--text-light);margin-bottom:15px;">El control biológico es un pilar fundamental del MIP, haz clic en cada paso para más detalles</p>
       
-      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; align-items: stretch;">
+      <div class="layout-duo">
         
         <div style="background: rgba(253, 253, 253, 0.9); padding: 15px; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.04); border: 1px solid #eee; backdrop-filter: blur(5px);">
           <div class="mip-diagram" style="display:flex; flex-direction:column; gap:8px;">
@@ -3184,7 +3428,7 @@ p {
       <h2 style="margin-bottom: 10px;">Riesgos y precauciones (no todo es perfecto)</h2>
       <p style="text-align:center;font-size:0.9rem;color:var(--text-light);margin-bottom:25px;">La introducción de especies exóticas conlleva riesgos ecológicos que exigen protocolos estrictos</p>
       
-      <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px;">
+      <div class="layout-duo">
         
         <!-- Riesgo 1 -->
         <div class="card entrance-left" style="background: rgba(255, 255, 255, 0.9); backdrop-filter: blur(5px); border-radius: 16px; padding: 25px; box-shadow: 0 4px 20px rgba(0,0,0,0.05); border-left: 5px solid #e74c3c; cursor: pointer;" onclick="this.querySelector('.expand-detail').classList.toggle('open')">
@@ -3253,7 +3497,7 @@ p {
       <h2 style="margin-bottom: 10px;">El futuro del control biológico</h2>
       <p style="text-align:center;font-size:0.9rem;color:var(--text-light);margin-bottom:25px;">Integración de biotecnología, inteligencia artificial y agricultura de precisión</p>
       
-      <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px;">
+      <div class="layout-trio">
         
         <div class="card entrance-up" style="background: rgba(255, 255, 255, 0.9); backdrop-filter: blur(5px); border-radius: 16px; padding: 25px; box-shadow: 0 4px 20px rgba(0,0,0,0.05); display: flex; flex-direction: column; align-items: center; text-align: center; border-top: 4px solid var(--primary); transition: transform 0.3s;">
           <div style="background: rgba(2, 48, 71, 0.05); color: var(--primary); width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 2rem; margin-bottom: 15px;"></div>
@@ -3297,7 +3541,7 @@ p {
       <h2 style="margin-bottom: 10px;">El control biológico en Colombia y LatAm</h2>
       <p style="text-align:center;font-size:0.9rem;color:var(--text-light);margin-bottom:25px;">Biodiversidad excepcional y ecosistema creciente de investigación e innovación</p>
       
-      <div style="display: grid; grid-template-columns: 35% 1fr; gap: 30px; align-items: stretch;">
+      <div class="layout-timeline">
         
         <!-- Columna Izquierda: Mapa y Estadísticas -->
         <div style="display: flex; flex-direction: column; gap: 15px;">
@@ -3325,11 +3569,11 @@ p {
         </div>
 
         <!-- Columna Derecha: Bento Boxes -->
-        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
+        <div class="layout-duo">
           
           <div style="grid-column: span 2; background: rgba(253,253,253,0.9); backdrop-filter: blur(5px); border-radius: 16px; padding: 20px; box-shadow: 0 4px 20px rgba(0,0,0,0.03); border: 1px solid #eee;">
             <h4 style="margin: 0 0 15px 0; font-size: 1.1rem; color: var(--text); display: flex; align-items: center; gap: 8px;"><span style="font-size: 1.3rem;"></span> Instituciones Clave</h4>
-            <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px;">
+            <div class="layout-trio-sm">
               <div style="background: white; padding: 12px; border-radius: 10px; border: 1px solid #f0f0f0; box-shadow: 0 2px 5px rgba(0,0,0,0.02); text-align: center;">
                 <div style="font-weight: 700; color: var(--green-dark); font-size: 0.9rem; margin-bottom: 5px;">AGROSAVIA</div>
                 <div style="font-size: 0.7rem; color: var(--text-light);">13 centros de investigación</div>
@@ -3377,7 +3621,7 @@ p {
       <p style="text-align:center;font-size:0.85rem;color:var(--text-light);margin-bottom:20px;">Fuentes científicas y académicas</p>
       
       <div style="flex: 1; overflow-y: auto; padding-right: 15px; margin-bottom: 20px;" class="custom-scrollbar">
-        <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(350px, 1fr)); gap: 12px; align-items: start;">
+        <div class="layout-ref-grid">
           <div class="card entrance-scale" style="background: white; border-radius: 12px; padding: 15px; border-left: 3px solid var(--green); box-shadow: 0 4px 15px rgba(0,0,0,0.02);">
             <div style="font-size: 0.75rem; color: var(--text); line-height: 1.5;">Altieri, M. A. (1999). <em>Agroecología: Bases científicas para una agricultura sustentable</em>. Nordan-Comunidad.</div>
           </div>
